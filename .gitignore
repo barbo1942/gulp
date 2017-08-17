@@ -2,3 +2,6 @@
 node_modules
 public
 vendors
+secrets
+.gitgpg
+**/*.css.map

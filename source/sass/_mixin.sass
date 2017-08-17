@@ -1,0 +1,39 @@
+$blue: #1736DC 
+
+%clearfix
+	&:after
+		content: ""
+		display: table
+		clear: both
+
+@mixin center($d: column)
+	display: flex
+	justify-content: center
+	align-items: center
+	flex-direction: $d
+
+@mixin size($w,$h:$w)
+	width: $w
+	height: $h
+
+
+
+
+@mixin ipad
+	@media(max-width: 768px)
+		@content
+
+@mixin iphone5-row
+	@media(max-width: 568px)
+		@content
+		
+
+@mixin iphone5-col
+	@media(max-width: 320px)
+		@content
+
+
+
+
+
+

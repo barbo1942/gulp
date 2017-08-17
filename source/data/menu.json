@@ -1,0 +1,10 @@
+{
+	"list": [{
+		"name": "首頁",
+		"url": "index.html"
+	},
+	{
+		"name": "高雄旅遊網",
+		"url": "list.html"
+	}]
+}

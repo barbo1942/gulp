@@ -1,0 +1,27 @@
+//- mixin link(name,url)
+//-   | #{path}
+//-   if (path==url)
+//-     li.nav-item.active
+//-       a.nav-link(href='#{url}') #{name}
+//-   else
+//-     li.nav-item
+//-       a.nav-link(href='#{url}') #{name}
+
+nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
+  button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  a.navbar-brand(href='#') Navbar
+  #navbarSupportedContent.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      each item in menu.list
+        //- +link(item.name,item.url)
+        li.nav-item.active
+          a.nav-link(href=item.url) #{item.name}
+          //- a.nav-link(href='#{item.url}') #{item.name}
+          //- a.nav-link(href='index.html') #{item.name}
+          //- a.nav-link(href='list.html') 
+          //-   | #{item.name} 
+
+    form.form-inline.my-2.my-lg-0
+      input.form-control.mr-sm-2(type='text', placeholder='Search')
+      button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search

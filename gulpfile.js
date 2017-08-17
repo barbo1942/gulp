@@ -10,7 +10,7 @@ var mainBowerFiles = require('main-bower-files');
 var browserSync = require('browser-sync').create();
 var minimist = require('minimist');
 var gulpSequence = require('gulp-sequence');
-
+var request = require('request-json');
 
 var envOptions = {
   string: 'env',
@@ -18,6 +18,15 @@ var envOptions = {
 }
 var options = minimist(process.argv.slice(2),envOptions)
 console.log(options)
+
+var client = request.createClient('https://randomuser.me/');
+
+gulp.task('getapi', function () {
+ client.get('api/', function (err, res, body) {
+ return console.log(body.results[0].name);
+ });
+});
+
 
 gulp.task('clean', function () {
   return gulp.src(['./.tmp','./public'], {read: false})
@@ -32,6 +41,16 @@ gulp.task('copyHTML',function () {
 gulp.task('pug', function buildHTML() {
   return gulp.src('./source/**/*.pug')
     .pipe($.plumber())
+    .pipe($.data(function () {
+      var khData = require('./source/data/data.json')
+      var menu = require('./source/data/menu.json')
+      var source = {
+        'khData': khData,
+        'menu': menu
+      }
+      // console.log('pug',source)
+      return source
+    }))
     .pipe($.pug({
       pretty: true 
       }))
@@ -72,13 +91,15 @@ gulp.task('babel', () =>
 );
 
 gulp.task('bower', function() {
-    return gulp.src(mainBowerFiles({
-      "overrides": {
-        "vue": {
-          "main": "dist/vue.js"
-        }
-      }
-    }))
+    return gulp.src(mainBowerFiles(
+    //   {
+    //   "overrides": {
+    //     "vue": {
+    //       "main": "dist/vue.js"
+    //     }
+    //   }
+    // }
+  ))
         .pipe(gulp.dest('./.tmp/vendors'))
         cb(err)
 });
@@ -109,12 +130,15 @@ gulp.task('image-min', function () {
 });
 
 
-
-
 gulp.task('watch', function () {
   gulp.watch('./source/sass/**/*.sass', ['sass']);
   gulp.watch('./source/**/*.pug', ['pug']);
   gulp.watch('./source/js/**/*.js', ['babel']);
+});
+
+gulp.task('deploy', function() {
+  return gulp.src('./public/**/*')
+    .pipe($.ghPages());
 });
 
 gulp.task('build', gulpSequence(['clean','pug','sass','babel','vendorJs','image-min']))
