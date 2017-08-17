@@ -1,0 +1,22 @@
+{
+  "name": "demo_project",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "barbo1942 <barbo19421942@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "#v4.0.0-alpha.6",
+    "vue": "^2.4.2"
+  }
+}
