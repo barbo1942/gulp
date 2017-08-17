@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-html(lang="en")
-head
-  meta(charset="UTF-8")
-  meta(name="viewport", content="width=device-width, initial-scale=1.0")
-  meta(http-equiv="X-UA-Compatible", content="ie=edge")
-  title Document
+extend layout.pug
 
-  link(rel='stylesheet' href='css/all.css')
-  script(src='js/all.js')
-  
-body
-  h1 sdfjkslfj
-  p s;fk
-  h2 sfdjklsdflksdfjkl
+block navbar
+  - var path='index.html'
+  include partials/navbar.pug
+
+block content
+  h2 #{menu.list[0].name}
