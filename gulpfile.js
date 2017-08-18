@@ -136,9 +136,13 @@ gulp.task('watch', function () {
   gulp.watch('./source/js/**/*.js', ['babel']);
 });
 
+var options={
+  // remoteUrl: "https://github.com/barbo1942/topic4.git", 
+  // branch: "topic4"
+}
 gulp.task('deploy', function() {
   return gulp.src('./public/**/*')
-    .pipe($.ghPages());
+    .pipe($.ghPages(options));
 });
 
 gulp.task('build', gulpSequence(['clean','pug','sass','babel','vendorJs','image-min']))
