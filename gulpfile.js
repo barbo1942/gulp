@@ -22,8 +22,11 @@ console.log(options)
 var client = request.createClient('https://randomuser.me/');
 
 gulp.task('getapi', function () {
- client.get('api/', function (err, res, body) {
- return console.log(body.results[0].name);
+ client.get('api/?results=10', function (err, res, body) {
+  console.log(body.results[0].phone)
+  console.log(body.results.length)
+  return body
+
  });
 });
 
@@ -38,7 +41,7 @@ gulp.task('copyHTML',function () {
              .pipe(gulp.dest('./public/'))
 });
 
-gulp.task('pug', function buildHTML() {
+gulp.task('pug',['getapi'], function buildHTML() {
   return gulp.src('./source/**/*.pug')
     .pipe($.plumber())
     .pipe($.data(function () {
@@ -92,13 +95,13 @@ gulp.task('babel', () =>
 
 gulp.task('bower', function() {
     return gulp.src(mainBowerFiles(
-    //   {
-    //   "overrides": {
-    //     "vue": {
-    //       "main": "dist/vue.js"
-    //     }
-    //   }
-    // }
+      {
+      "overrides": {
+        "vue": {
+          "main": "dist/vue.js"
+        }
+      }
+    }
   ))
         .pipe(gulp.dest('./.tmp/vendors'))
         cb(err)
