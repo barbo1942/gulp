@@ -150,4 +150,4 @@ gulp.task('deploy', function() {
 
 gulp.task('build', gulpSequence(['clean','pug','sass','babel','vendorJs','image-min']))
 
-gulp.task('default',['pug','sass','babel','vendorJs','browser-sync','image-min','watch']);
+gulp.task('default',['getapi','pug','sass','babel','vendorJs','browser-sync','image-min','watch']);

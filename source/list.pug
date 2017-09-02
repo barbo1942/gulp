@@ -5,6 +5,9 @@ block navbar
   include partials/navbar.pug
 
 block content
+  //- h2 #{body.results[0].phone}
+  //- h2 #{menu.list[0].name}
+  hr
   .card-columns
     each item in khData.result.records
       .card
